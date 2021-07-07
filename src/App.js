@@ -8,7 +8,7 @@ let AppContext = createContext(null)
 
 function App() {
     const eventPopupData = {
-        id: '', title: 'title', memo: '',
+        id: '', title: '', memo: '',
         place: '', link: '', person: '',
         startDate: '', endDate: ''
     }
