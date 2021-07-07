@@ -1,0 +1,127 @@
+:root {
+    --grid-border: 1px solid #dadce0
+}
+
+.calendar {
+    display: grid;
+    grid-area: calendar;
+    /* height: 100vh; */
+
+    box-sizing: border-box;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 28px repeat(5, 1fr);
+
+    border-top: var(--grid-border);
+    border-left: var(--grid-border);
+}
+
+.calendar6 {
+    grid-template-rows: 28px repeat(6, 1fr);
+}
+
+.calendar > * {
+    border-bottom: var(--grid-border);
+    border-right: var(--grid-border);
+}
+
+.title {
+    cursor: default;
+
+    text-align: center;
+    border-bottom: none;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #757575;
+}
+
+.day {
+    padding: 4px 0 4px 4px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.day > div:first-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 12px;
+    color: #212121;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.day > div:first-child > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+}
+
+.day > div:first-child > span:hover {
+    background-color: #f1f3f4;
+}
+
+.withMonth {
+    width: 52px !important;
+    border-radius: 16px !important;
+}
+
+.today {
+    color: #fafafa;
+    background-color: #1a73e8;
+}
+
+.today:hover {
+    background-color: #1a73e8d2 !important;
+}
+
+.dim {
+    color: #757575;
+}
+
+.event {
+    border-radius: 2px;
+    padding: 2px 4px;
+    cursor: pointer;
+    margin-bottom: 2px;
+    font-size: 12px;
+}
+
+.more {
+    font-size: 12px;
+    padding: 2px 4px;
+    cursor: pointer;
+}
+
+.event:hover {
+    background-color: #e5e5e5;
+}
+
+.event > span {
+    font-weight: 700;
+}
+
+.day > div:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    /* overflow: auto; */
+}

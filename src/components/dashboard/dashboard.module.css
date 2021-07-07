@@ -1,0 +1,50 @@
+.dashboard {
+    display: grid;
+    grid-auto-flow: row;
+
+    place-items: center;
+    grid-gap: 32px;
+
+    margin: 0px 16px 0 16px;
+}
+
+.dashboard > span:first-child {
+    margin-top: 32px;
+    font-size: 18px;
+    font-weight: 700;
+    
+    position: sticky;
+    top: 0;
+}
+
+.events {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    grid-gap: 16px;
+}
+
+.events > * {
+    border-bottom: none !important;
+    
+    box-shadow: 0 0 3px 2px #e1e1e1;
+    border-radius: 4px;
+}
+
+.login {
+    display: grid;
+    place-content: center;
+    height: 100vh;
+}
+
+.loginBox {
+    display: grid;
+    grid-auto-flow: row;
+    grid-gap: 8px;
+}
+
+.loginBox > span:first-child {
+    font-weight: 700;
+    font-size: 16px;
+
+    margin-bottom: 16px;
+}
