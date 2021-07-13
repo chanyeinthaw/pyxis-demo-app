@@ -72,10 +72,18 @@ export function Event({ readOnly = false, title, showPerson, person, memo, start
                     <span>{person}</span>
                 </React.Fragment>
             }
-            <Icon name='map marker' />
-            <span>{place}</span>
-            <Icon name='file alternate' />
-            <span>{memo}</span>
+            {
+                place && <React.Fragment>
+                    <Icon name='map marker' />
+                    <span>{place}</span>
+                </React.Fragment>
+            }
+            {
+                memo && <React.Fragment>
+                    <Icon name='file alternate' />
+                    <span>{memo}</span>
+                </React.Fragment>
+            }
             {
                 !!link && <React.Fragment>
                     <Icon name='linkify' />

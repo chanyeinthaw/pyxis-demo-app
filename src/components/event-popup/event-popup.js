@@ -24,6 +24,9 @@ export default function EventPopup({onSave, onDelete}) {
         let keys = Object.keys(state.eventPopup.data)
         for(let key of keys) {
             if (key === 'id') continue;
+            if (key === 'place') continue;
+            if (key === 'link') continue;
+            if (key === 'memo') continue;
             if (state.eventPopup.data[key] === '') {
                 console.log(key, state.eventPopup.data[key])
                 return true
@@ -75,6 +78,8 @@ export default function EventPopup({onSave, onDelete}) {
 
     const title = eventPopup.mode === 'create' ? 'Create event' : 'Update event'
 
+    const Optional = () => <span className={css.optional}>(optional)</span>
+
     return (
         <div className={classes} onClick={_ => eventPopup.close()}>
             <div className={css.popup} onClick={e => e.stopPropagation()}>
@@ -125,17 +130,17 @@ export default function EventPopup({onSave, onDelete}) {
                 </div>
 
                 <div className={css.input}>
-                    <span>Place</span>
+                    <span>Place <Optional /></span>
                     <Input value={eventPopupData.place} placeholder='Place of the event' onChange={onInputChange('place')} />
                 </div>
 
                 <div className={css.input}>
-                    <span>Link</span>
+                    <span>Link <Optional /></span>
                     <Input value={eventPopupData.link} placeholder='Link to the event' onChange={onInputChange('link')} />
                 </div>
 
                 <div className={css.input}>
-                    <span>Memo</span>
+                    <span>Memo <Optional /></span>
                     <Input value={eventPopupData.memo} placeholder='Description of the event' onChange={onInputChange('memo')} />
                 </div>
 

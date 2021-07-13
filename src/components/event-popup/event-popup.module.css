@@ -90,3 +90,8 @@
     margin-top: 8px !important;
     width: 100%;
 }
+
+.optional {
+    font-size: 12px;
+    color: #ccc;
+}

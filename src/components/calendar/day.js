@@ -40,12 +40,12 @@ export default function Day({day, onEventClick = _ => {}, onDayClick = _ => {}})
             <div>
                 { state.events.slice(0, sliceTo).map((event, i) => {
                     let time = dayjs(event.startDate).format('h:mma')
-                    let place = event.place
+                    let title = event.title
 
                     return (
                         <span className={css.event} key={i} onClick={_onEventClick}>
                             {time + ' '}
-                            <span>{place}</span>
+                            <span>{title}</span>
                         </span>
                     )
                 })}
