@@ -2,8 +2,11 @@ import css from './dashboard.module.css'
 import {Event} from '../events/events'
 import { useEffect, useState } from 'react'
 import {Input, Button} from 'semantic-ui-react'
+import { useAppContext } from '../../App'
+import Scheduler from '../scheduler/scheduler'
 
 export default function Dashboard() {
+    const {state, setDashboardViewMode} = useAppContext()
     const [events, setEvents] = useState([])
     const [loggedIn, setLoggedIn] = useState(false)
     const [credentials, setCredentials] = useState({
@@ -25,8 +28,8 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        if (loggedIn) readAllEvents()
-    }, [loggedIn])
+        if (loggedIn && state.dashboardViewMode === 'events') readAllEvents()
+    }, [loggedIn, state.dashboardViewMode])
 
     const onLogin = (e) => {
         e.preventDefault()
@@ -48,6 +51,10 @@ export default function Dashboard() {
         })
     }
 
+    const goToCalendar = () => {
+        setDashboardViewMode('calendar')
+    }
+
     if (!loggedIn) {
         return (
             <div className={css.login}>
@@ -58,19 +65,25 @@ export default function Dashboard() {
 
                     <Input type='password' placeholder='Password' onChange={onInput('password')}/>
 
-                    <Button type='submit' primary>Submit</Button>
+                    <Button onClick={onLogin} primary>Submit</Button>
                 </form>
             </div>
         )
     }
 
+    if (state.dashboardViewMode === 'calendar') {
+        return <Scheduler onGoBack={() => setDashboardViewMode('events')}/>
+    }
+
     return (
         <div className={css.dashboard}>
-            <span>Events</span>
+            <div>
+                <span>All Events</span>
+                <Button primary onClick={goToCalendar}>Go to calendar</Button>
+            </div>
 
             <div className={css.events}>
                 { events.map(event => {
-                    console.log(event.startDate)
                     return <Event
                         readOnly={true}
                         showPerson={true}

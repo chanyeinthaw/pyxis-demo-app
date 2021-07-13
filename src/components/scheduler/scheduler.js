@@ -1,15 +1,15 @@
 import Calendar from '../calendar/calendar'
 import css from './scheduler.module.css'
-import {Button, Select} from 'semantic-ui-react'
+import {Button} from 'semantic-ui-react'
 import _strings from './strings'
 import dayjs from 'dayjs'
 import { useAppContext } from '../../App'
 import Events from '../events/events'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import EventPopup from '../event-popup/event-popup'
 
-export default function Scheduler() {
-    const {state: {locale, targetDate, events, eventPopup: _eventPopup}, showEventView, setEventViewVisibility, eventPopup} = useAppContext()
+export default function Scheduler({onGoBack = null}) {
+    const {state: {locale, targetDate, eventPopup: _eventPopup}, showEventView, setEventViewVisibility, eventPopup} = useAppContext()
     const eventController = useRef({})
 
     const onDayClick = day => {
@@ -43,7 +43,7 @@ export default function Scheduler() {
 
     return (
         <div className={css.scheduler} >
-            <ControlBar />
+            <ControlBar onGoBack={onGoBack}/>
             <Calendar ref={eventController} locale={locale} targetDate={targetDate.format('YYYY-MM-DD')} onEventClick={events => setEventViewVisibility(true, events)} onDayClick={onDayClick} />
             { showEventView && <Events eventController={eventController}/> }
             <EventPopup onSave={onSave} onDelete={onDelete} />
@@ -51,8 +51,8 @@ export default function Scheduler() {
     )
 }
 
-function ControlBar() {
-    const {state: {locale, targetDate}, setLocale, setTargetDate} = useAppContext()
+function ControlBar({onGoBack}) {
+    const {state: {locale, targetDate}, setTargetDate} = useAppContext()
     const strings = _strings[locale]
 
     const loader = (pivot = 0) => _ => {
@@ -61,7 +61,7 @@ function ControlBar() {
         setTargetDate(date.add(pivot, 'month'))
     }
 
-    const languages = [{ key: 'jp', value: 'jp', text: 'JP'}, { key: 'en', value: 'en', text: 'EN'}]
+    // const languages = [{ key: 'jp', value: 'jp', text: 'JP'}, { key: 'en', value: 'en', text: 'EN'}]
 
     return ( <div className={css.controls} > 
         <div>
@@ -75,6 +75,7 @@ function ControlBar() {
             <span className={css.date} >{targetDate.format('MMM YYYY')}</span>
         </div>
 
+        { onGoBack && <Button onClick={onGoBack}>Back to dashboard</Button> }
         {/* <Select 
             onChange={(e, {value}) => setLocale(value)}
             options={languages} 

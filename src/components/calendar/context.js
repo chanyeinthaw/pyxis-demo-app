@@ -1,4 +1,4 @@
-import { createContext, forwardRef, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, forwardRef, useCallback, useContext, useState } from "react";
 import dayjs from 'dayjs'
 import { generateUniqueId } from "../../lib/generate-uuid";
 
@@ -148,9 +148,9 @@ function useCalendarState() {
         let events = []
         let days = Object.keys(state.calendar)
 
-        days.map(date => {
+        for(let date of days) {
             events.push(...state.calendar[date].events)
-        })
+        }
         
         return events
     }
@@ -162,10 +162,6 @@ function useCalendarState() {
     const getEventsAt = (date) => {
         return (state.calendar[date] || {events: []} ).events
     }
-
-    useEffect(() => {
-        window.EE = createEvent
-    }, [state])
 
     return { state, load, getDayState, loadCalendar, Event: {
         create: createEvent,

@@ -2,19 +2,27 @@
     display: grid;
     grid-auto-flow: row;
 
-    place-items: center;
+    place-content: center;
     grid-gap: 32px;
 
     margin: 0px 16px 0 16px;
 }
 
-.dashboard > span:first-child {
+.dashboard > div:first-child {
     margin-top: 32px;
-    font-size: 18px;
-    font-weight: 700;
-    
+
     position: sticky;
     top: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard > div:first-child > span:first-child {
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .events {

@@ -15,6 +15,7 @@ function App() {
 
     const [state, setState] = useState({
         targetDate: dayjs(),
+        dashboardViewMode: 'events',
         userId: '',
         locale: 'en',
         events: [],
@@ -115,6 +116,12 @@ function App() {
 
     const provide = {
         state, 
+        setDashboardViewMode: (dashboardViewMode = 'events') => {
+            setState(state => ({
+                ...state,
+                dashboardViewMode
+            }))
+        },
         eventPopup: {
             open: openEventPopup,
             close: closeEventPopup,
